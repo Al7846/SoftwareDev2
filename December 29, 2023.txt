@@ -1,0 +1,7 @@
+
+11111SimonITStaff Time of access: Fri Dec 29 18:39:53 2023  Room: ks222Access: Granted
+11111SimonITStaff Time of access: Fri Dec 29 18:51:38 2023  Room: ks221Access: Granted
+11111SimonITStaff Time of access: Fri Dec 29 20:10:49 2023  Room: ks222Access: Granted
+234214JamieDTStudent Time of access: Fri Dec 29 20:12:38 2023  Room: ks222Access: Granted
+11111SimonITStaff Time of access: Fri Dec 29 20:13:57 2023  Room: ks222Access: Granted
+11111SimonITStaff Time of access: Fri Dec 29 20:15:23 2023  Room: ks222Access: Granted

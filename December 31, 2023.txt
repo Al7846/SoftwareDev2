@@ -1,0 +1,4 @@
+
+36363JoeCleaner Time of access: Sun Dec 31 14:10:31 2023  Room: ks227Access: Denied
+11111SimonITStaff Time of access: Sun Dec 31 14:10:54 2023  Room: ks222Access: Denied
+11111SimonITStaff Time of access: Sun Dec 31 14:11:43 2023  Room: ks221Access: Granted
