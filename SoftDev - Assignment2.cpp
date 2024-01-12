@@ -103,14 +103,14 @@ public:
 	virtual void RoomAction() = 0;//abstract method is only initalised when the 'Get_Room_Map' class is inherted by another classwhich will have it's own individiual functionality
 	void DisplayCollegeMap() //displays the college map 
 	{
-		cout << "Room:";
+		cout << "Room:                      Users who can access the room:         Type of room:   Room Mode:(Normal/Emergency)";
 		cout << '\n';
 		cout << '\n';
 		//Accessed from https://marketsplash.com/tutorials/cpp/cplusplus-map-to-file/ Accessed at:25/11/23
 		std::map<std::string, string>::iterator o = map_of_rooms.begin();//iterates through map using a iterator function which iterates bothe keyts and values from the beginning of the map
 		//Accessed from https://iq.opengenus.org/2d-maps-in-cpp/ Accessed at:25/11/23
 		for (o = map_of_rooms.begin(); o != map_of_rooms.end(); o++) {//for loop that loops from the start of the map to the end of the map 
-			cout << o->first << '\n';//prints out the map keys which are the building keys and room numbers combined
+			cout << o->first << "                       " << o->second << '\n';//prints out the map keys which are the building keys and room numbers combined
 		}//this is done by using a pointer that points to the keys of the map only using the pointer 'first'. The 'second' pointer is then used to extract map values.
 
 	}
@@ -229,7 +229,7 @@ public:
 		else if (choice == "3")buildingName = "bs";
 
 
-		cout << "What is the number of the room would you like to update ?";
+		cout << "What is the number of the room would you like to remove ?";
 		cin >> room_number;
 
 
@@ -391,7 +391,7 @@ public:
 	string l;//stores each line of the file
 	void readuserprofiles()
 	{
-		std::ifstream f("UserProfiles.txt");//creates an output file stream
+		std::ifstream f("ID_Card_List.txt");//creates an output file stream
 
 		cout << "Number" << " Name" << " Role";//prints out where the user barcode number, name and role is 
 		cout << '\n';
@@ -417,7 +417,7 @@ public:
 		int deleted_barcode;
 		int extracted_barcode;
 
-		ifstream i("UserProfiles.txt"); //input text file 
+		ifstream i("ID_Card_List.txt"); //input text file 
 		ofstream o("temp.txt"); //text file that data is output to temporarily
 
 		cout << "Enter the card barcode number of the user you wish to delete:" << endl;
@@ -452,7 +452,7 @@ public:
 		string op;//stores line of a file as a string
 
 		ifstream input("temp.txt");//where the updated list of user profiles are saved to
-		ofstream output("UserProfiles.txt");//where the current list of user profiles are saved to
+		ofstream output("ID_Card_List.txt");//where the current list of user profiles are saved to
 
 
 		while (getline(input, op)) {//while loop gets ecah line of the temp text file containing up to date user profiles
@@ -480,7 +480,7 @@ public:
 		int extracted_barcode;
 		string current_role;
 
-		std::ifstream i("UserProfiles.txt");
+		std::ifstream i("ID_Card_List.txt");
 		std::ofstream o("temp.txt");
 
 		cout << "Enter the card barcode number of the user you wish to remove:" << endl;
@@ -531,7 +531,7 @@ public:
 			temp2.replace(pos, empty.length(), empty);//replaces all characters from the index position of the 1st mathcing charcter to the last matching character
 		}
 
-		std::ifstream in("UserProfiles.txt");
+		std::ifstream in("ID_Card_List.txt");
 		while (in >> temp3)
 		{
 			stringstream var;
@@ -555,7 +555,7 @@ public:
 		string op;//stores line of a file as a string
 
 		ifstream input("temp.txt");//where the updated list of user profiles are saved to
-		ofstream output("UserProfiles.txt");//where the current list of user profiles are saved to
+		ofstream output("ID_Card_List.txt");//where the current list of user profiles are saved to
 
 
 		while (getline(input, op)) {//while loop gets ecah line of the temp text file containing up to date user profiles
@@ -585,7 +585,7 @@ public:
 		string current_role;
 		string updated_role;
 
-		std::ifstream i("UserProfiles.txt");
+		std::ifstream i("ID_Card_List.txt");
 		std::ofstream o("temp.txt");
 
 		cout << "Enter the card barcode number of the user you wish to update:" << endl;
@@ -653,7 +653,7 @@ public:
 
 
 
-		ifstream in("UserProfiles.txt");
+		ifstream in("ID_Card_List.txt");
 		while (in >> temp3)
 		{
 			stringstream var;
@@ -678,7 +678,7 @@ public:
 		string op;//stores line of a file as a string
 
 		ifstream input("temp.txt");//where the updated list of user profiles are saved to
-		ofstream output("UserProfiles.txt");//where the current list of user profiles are saved to
+		ofstream output("ID_Card_List.txt");//where the current list of user profiles are saved to
 
 
 		while (getline(input, op)) {//while loop gets ecah line of the temp text file containing up to date user profiles
@@ -705,7 +705,7 @@ public:
 		ofstream o;
 		ifstream i;
 
-		i.open("UserProfiles.txt");
+		i.open("ID_Card_List.txt");
 		cout << "Enter the users barcode, must be 5 digits long:";
 		cin >> barcode;
 		cout << "Enter the users Name:";
@@ -729,7 +729,7 @@ public:
 		else if (choice == "7")role = "EmergencyResponder";
 
 		//Accessed at https://www.tutorialride.com/cpp-file-management/append-to-a-file-c-program.htm#google_vignette Accessed on(7/11/23)
-		o.open("UserProfiles.txt", ios::app); //open up user profile text file and set it in append mode to add to the text file
+		o.open("ID_Card_List.txt", ios::app); //open up user profile text file and set it in append mode to add to the text file
 
 		o << "\n";//append a new lkine to the text file
 		o << barcode;//append users entered barcode
@@ -766,7 +766,7 @@ public:
 	long extracted_barcode;//saves users extracted barcode from string
 	void check_user_roles()
 	{
-		std::ifstream i("UserProfiles.txt");
+		std::ifstream i("ID_Card_List.txt");
 		//std::ofstream o("temp.txt");
 		while (i >> temp)
 		{
@@ -990,16 +990,18 @@ public:
 		date_now = localtime(&moment);//gets the local time then uses the tm strct to convert to an appropiate date.
 
 		char d[100];//character array to store a string that contains date and time up to 100 charcters, used from link on how sfrtime works
-		strftime(d, 50, "%B %d, %Y", date_now); //stores the current date with 'B' representing the current month,'d' representing the current day and 'Y' representing the year as mentioned in the provoded link on how 'sfrtime()' works.The full date in it's correct format is then stored in the char array string called 'D' in it's correct format.
-		string a = d;//d is then stored as a string data type called a. 
-		string f = a.append(".txt");//string f then uses the previous variable called 'a' which contains the full date and then uses the append funcion to append another string ".txt" which is a file type, which then guves us a full filename. 
+		strftime(d, 50, "%B %d, %Y", date_now);
+		//stores the current date with 'B' representing the current month,'d' representing the current day and 'Y' representing the year as mentioned in the provoded link on how 'sfrtime()' works.The full date in it's correct format is then stored in the char array string called 'D' in it's correct format.
+		string f = "room_access_log_{";
+		string a = f.append(d);//d is then stored as a string data type called a. 
+		string fe = a.append("}.txt");//string f then uses the previous variable called 'a' which contains the full date and then uses the append funcion to append another string ".txt" which is a file type, which then guves us a full filename. 
 
 		if (grant_access == true) //using the boolean varaiable 'grant access' from the inherited class 'room_type', if grant_access  is set to true
 		{
 			string entry = temp2 + " Time of access: " + t + " Room: " + buildingName + room_number + "Access: Granted";//a string called entry stores the users profile, when the user accessed the room, which room building and number they attempted to access and a statement to say that access has been granted.
 			//Accessed from: https://math.hws.edu/eck/cs225/s03/files_and_strings.html Used this link to find out how to convert a string to a filename using 'c_str()'. Accessed at: 29/12/23
 			ofstream file_out;//allow data to be appeneded to a file.
-			file_out.open(f.c_str(), ios::app);// opens / makes a log file using the string specified with the days,months and years with an appended file format. I also used the 'c_str()' method to then convert the string filename which then allowed the file to be created / opened with the string as the filename. 
+			file_out.open(fe.c_str(), ios::app);// opens / makes a log file using the string specified with the days,months and years with an appended file format. I also used the 'c_str()' method to then convert the string filename which then allowed the file to be created / opened with the string as the filename. 
 			file_out << "\n";//creates a newline in the log text file
 			file_out << entry;//appends the log entry string to the text file
 
@@ -1012,7 +1014,7 @@ public:
 
 			ofstream file_out;
 
-			file_out.open(f.c_str(), ios::app);
+			file_out.open(fe.c_str(), ios::app);
 			file_out << "\n";
 			file_out << entry;
 
