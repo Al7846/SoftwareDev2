@@ -483,7 +483,7 @@ public:
 		std::ifstream i("ID_Card_List.txt");
 		std::ofstream o("temp.txt");
 
-		cout << "Enter the card barcode number of the user you wish to remove:" << endl;
+		cout << "Enter the card barcode number of the user:" << endl;
 		cin >> deleted_barcode;
 
 		cout << "Enter the current role of the user:" << endl;
@@ -844,12 +844,16 @@ public:
 
 		while (o != mapofrooms.end())//while loop that loops throigh all of the map keys and value until the end of the map, which it then stops at
 		{
-
+			
 
 			float total_secs = (hour * 3600) + (minutes * 60) + seconds;//float variable that stores the current time in seconds by converting bith the minutes and hours in seconds and then adding the current seconds, giving a total time value in seconds  
 
 			string word = o->second;//string stores the map value
-			if (o->first == a && word.find("Normal") != string::npos && word.find("LectureHall"))//if condition used to check the map key matches the concatenated key developed earlier on storing the room name and number the user has requested to enter  
+			if (user_role == "undefined") 
+			{
+				break;
+			}
+			if (o->first == a && word.find("Normal") != string::npos && word.find("LectureHall") != string::npos)//if condition used to check the map key matches the concatenated key developed earlier on storing the room name and number the user has requested to enter  
 			{
 				if (word.find("Staff") != string::npos && user_role == "Staff" && total_secs >= ((5 * 3600) + (30 * 60)) && total_secs <= ((23 * 3600) + (59 * 60) + (59)))
 				{//if the map value conatins the matching user role "Staff" and the user profile contains the matched role "Staff" and the local time in seconds is greater than 5:30 am converted to seconds and less than or equal to "23:59:59" converted to seconds
@@ -879,7 +883,7 @@ public:
 				}
 
 			}
-			else if (o->first == a && word.find("Normal") != string::npos && word.find("TeachingRoom"))
+			else if (o->first == a && word.find("Normal") != string::npos && word.find("TeachingRoom") != string::npos)
 			{
 				if (word.find("Staff") != string::npos && user_role == "Staff" && total_secs >= ((5 * 3600) + (30 * 60)) && total_secs <= ((23 * 3600) + (59 * 60) + (59)))
 				{
@@ -904,7 +908,7 @@ public:
 				}
 
 			}
-			else if (o->first == a && word.find("Normal") != string::npos && word.find("StaffRoom"))
+			else if (o->first == a && word.find("Normal") != string::npos && word.find("StaffRoom") != string::npos)
 			{
 				if (word.find("Staff") != string::npos && user_role == "Staff" && total_secs >= ((5 * 3600) + (30 * 60)) && total_secs <= ((23 * 3600) + (59 * 60) + (59)))
 				{
@@ -924,7 +928,7 @@ public:
 				}
 
 			}
-			else if (o->first == a && word.find("Normal") != string::npos && word.find("SecureRoom"))
+			else if (o->first == a && word.find("Normal") != string::npos && word.find("SecureRoom") != string::npos)
 			{
 				if (word.find("Manager") != string::npos && user_role == "Manager" || word.find("Security") != string::npos && user_role == "Security")
 				{//if the user roles are "Manager" or "Security", they can access a secure room at any given time
