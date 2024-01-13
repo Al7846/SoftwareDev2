@@ -6,3 +6,10 @@
 12311HaroldCleaner Time of access: Fri Jan 12 19:09:32 2024  Room: ks222Access: Granted
 12311HaroldCleaner Time of access: Fri Jan 12 19:15:51 2024  Room: ks222Access: Granted
  Time of access: Fri Jan 12 19:18:50 2024  Room: ks222Access: Denied
+11111SimonStaff Time of access: Fri Jan 12 20:09:07 2024  Room: ks222Access: Denied
+12346ChrisManager Time of access: Fri Jan 12 20:09:50 2024  Room: ks221Access: Granted
+26262FredStudent Time of access: Fri Jan 12 20:11:03 2024  Room: ks222Access: Denied
+93831TedCleaner Time of access: Fri Jan 12 20:11:36 2024  Room: ks222Access: Denied
+11111SimonStaff Time of access: Fri Jan 12 20:12:03 2024  Room: ks222Access: Granted
+12221DomRoleRemoved Time of access: Fri Jan 12 20:12:37 2024  Room: ks221Access: Denied
+93831TedCleaner Time of access: Fri Jan 12 20:13:43 2024  Room: ks223Access: Granted

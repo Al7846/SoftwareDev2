@@ -103,14 +103,32 @@ public:
 	virtual void RoomAction() = 0;//abstract method is only initalised when the 'Get_Room_Map' class is inherted by another classwhich will have it's own individiual functionality
 	void DisplayCollegeMap() //displays the college map 
 	{
-		cout << "Room:                      Users who can access the room:         Type of room:   Room Mode:(Normal/Emergency)";
+		cout << "Room:                        Users who can access the room:         Type of room:     Room Mode:(Normal/Emergency)";
 		cout << '\n';
 		cout << '\n';
 		//Accessed from https://marketsplash.com/tutorials/cpp/cplusplus-map-to-file/ Accessed at:25/11/23
 		std::map<std::string, string>::iterator o = map_of_rooms.begin();//iterates through map using a iterator function which iterates bothe keyts and values from the beginning of the map
 		//Accessed from https://iq.opengenus.org/2d-maps-in-cpp/ Accessed at:25/11/23
 		for (o = map_of_rooms.begin(); o != map_of_rooms.end(); o++) {//for loop that loops from the start of the map to the end of the map 
-			cout << o->first << "                       " << o->second << '\n';//prints out the map keys which are the building keys and room numbers combined
+			cout << o->first << "                       ";//ouputs the room key to the screen and then the code below is responsiable for printing out the map key values with spaces in between characters where a capital letter is present.
+			const char* x = o->second.c_str();// to loop through each character of the key value, it needs to be converted to a constant char, used this link to resolve my issue: Accessed at: https://www.tutorialspoint.com/How-to-convert-an-std-string-to-const-char-or-char-in-Cplusplus Accesssed on: 13/1/23
+			for (int p = 0; p < strlen(x); p++)//Used this link to look at how to identify capital letters in a string, Accessed at: https://www.programiz.com/cpp-programming/library-function/cctype/isupper Accessed on:13/1/23
+			{
+				if (isupper(x[p])) //if a capital letter is present in the string
+				{
+					cout << " " << x[p];//print a space then print out the caital letter
+					
+				}
+				else if (islower(x[p])) //if a lower case charcter is found
+				{
+					cout << x[p];//print it to the screen without any spaces
+				
+				}
+					
+			}
+			cout << '\n';//print out new line for the next user profile to be printed to the screen
+			
+			//prints out the map keys which are the building keys and room numbers combined
 		}//this is done by using a pointer that points to the keys of the map only using the pointer 'first'. The 'second' pointer is then used to extract map values.
 
 	}
@@ -391,13 +409,31 @@ public:
 	string l;//stores each line of the file
 	void readuserprofiles()
 	{
-		std::ifstream f("ID_Card_List.txt");//creates an output file stream
+		ifstream f("ID_Card_List.txt");//creates an output file stream
 
-		cout << "Number" << " Name" << " Role";//prints out where the user barcode number, name and role is 
+		cout << "Barcode:" << "Name:" << "Role:";//prints out where the user barcode number, name and role is 
 		cout << '\n';
 		cout << '\n';
 		while (f >> l) {//extracts each line within the file as a string which is a users profile
-			cout << l << endl;//prints out all the profiles to the screen
+			const char* x = l.c_str();// to loop through each character of the key value, it needs to be converted to a constant char, used this link to resolve my issue: Accessed at: https://www.tutorialspoint.com/How-to-convert-an-std-string-to-const-char-or-char-in-Cplusplus Accesssed on: 13/1/23
+			for (int p = 0; p < strlen(x); p++)//Used this link to look at how to identify capital letters in a string, Accessed at: https://www.programiz.com/cpp-programming/library-function/cctype/isupper Accessed on:13/1/23
+			{
+				if (isdigit(x[p])) ///if a number is present in the string
+				{
+					cout << x[p];//print it out
+				}
+				else if (isupper(x[p]))//if a capital letter is present in the string
+				{
+					cout << " " << x[p];//print out a space and then print out the capital letter
+				}
+				else if (islower(x[p]))//if a lower case letter is present in the string
+				{
+					cout << x[p];//print it out 
+				}
+
+			}
+			cout << '\n';//once the string has been looped,it prints out a new line and then loops through the next user profile string
+			//cout << l << endl;//prints out all the profiles to the screen
 		}
 
 
@@ -731,7 +767,7 @@ public:
 		//Accessed at https://www.tutorialride.com/cpp-file-management/append-to-a-file-c-program.htm#google_vignette Accessed on(7/11/23)
 		o.open("ID_Card_List.txt", ios::app); //open up user profile text file and set it in append mode to add to the text file
 
-		o << "\n";//append a new lkine to the text file
+		o << "\n";//append a new line to the text file
 		o << barcode;//append users entered barcode
 		o << name;//apppend users entered name
 		o << role;//append users entered role
@@ -842,16 +878,16 @@ public:
 		float minutes = (float)t->tm_min;//float variable points to current minutes and stores it in a float variable called minute 
 		float seconds = (float)t->tm_sec;//float variable points to current seconds and stores it in a float variable called seconds 
 
-		while (o != mapofrooms.end())//while loop that loops throigh all of the map keys and value until the end of the map, which it then stops at
+		while (o != mapofrooms.end())//while loop that loops through all of the map keys and value until the end of the map, which it then stops looping at
 		{
 			
 
 			float total_secs = (hour * 3600) + (minutes * 60) + seconds;//float variable that stores the current time in seconds by converting bith the minutes and hours in seconds and then adding the current seconds, giving a total time value in seconds  
 
 			string word = o->second;//string stores the map value
-			if (user_role == "undefined") 
+			if (user_role == "undefined") //if the user acquires no defined rolw
 			{
-				break;
+				break;//break out of the, the grant_access value will then be kept at it's default value which is false, which then denies the user access to the designated room. 
 			}
 			if (o->first == a && word.find("Normal") != string::npos && word.find("LectureHall") != string::npos)//if condition used to check the map key matches the concatenated key developed earlier on storing the room name and number the user has requested to enter  
 			{
