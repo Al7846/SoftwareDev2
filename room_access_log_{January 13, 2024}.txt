@@ -1,2 +1,6 @@
 
 11111SimonStaff Time of access: Sat Jan 13 14:11:04 2024  Room: ks222Access: Granted
+11111SimonStaff Time of access: Sat Jan 13 18:01:54 2024  Room: ks223Access: Granted
+11111SimonStaff Time of access: Sat Jan 13 18:02:22 2024  Room: ks224Access: Denied
+26262FredStudent Time of access: Sat Jan 13 18:04:20 2024  Room: ks227Access: Granted
+93831TedCleaner Time of access: Sat Jan 13 18:05:07 2024  Room: ks229Access: Granted

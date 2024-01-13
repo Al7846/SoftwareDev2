@@ -85,12 +85,12 @@ public:
 
 	}
 	//A map data structure stores a key value pair, the keys and values are both string data types
-	std::map<string, std::string> map_of_rooms;//Accessed from https://marketsplash.com/tutorials/cpp/cplusplus-map-to-file/ Accessed at:25/11/23
+	map<string, std::string> map_of_rooms;//Accessed from https://marketsplash.com/tutorials/cpp/cplusplus-map-to-file/ Accessed at:25/11/23
 	string key;//key is initalised
-	std::string value;//value is initialised
+	string value;//value is initialised
 	void GetMapOfCollege()
 	{
-		std::ifstream inputFile("map.txt");//input stream creates a text file called "map.txt" which then outputs the map keys and values into a map datat structure.
+		ifstream inputFile("map.txt");//input stream creates a text file called "map.txt" which then outputs the map keys and values into a map datat structure.
 		//Accessed from https://marketsplash.com/tutorials/cpp/cplusplus-map-to-file/ Accessed at:25/11/23
 		//Accessed from https://iq.opengenus.org/2d-maps-in-cpp/ Accessed at:25/11/23
 		while (inputFile >> key >> value) {//while loop loops through file until all keys and values are initialised into the map structure
@@ -107,7 +107,7 @@ public:
 		cout << '\n';
 		cout << '\n';
 		//Accessed from https://marketsplash.com/tutorials/cpp/cplusplus-map-to-file/ Accessed at:25/11/23
-		std::map<std::string, string>::iterator o = map_of_rooms.begin();//iterates through map using a iterator function which iterates bothe keyts and values from the beginning of the map
+		map<std::string, string>::iterator o = map_of_rooms.begin();//iterates through map using a iterator function which iterates bothe keyts and values from the beginning of the map
 		//Accessed from https://iq.opengenus.org/2d-maps-in-cpp/ Accessed at:25/11/23
 		for (o = map_of_rooms.begin(); o != map_of_rooms.end(); o++) {//for loop that loops from the start of the map to the end of the map 
 			cout << o->first << "                       ";//ouputs the room key to the screen and then the code below is responsiable for printing out the map key values with spaces in between characters where a capital letter is present.
@@ -345,7 +345,7 @@ public:
 
 		map_of_rooms[buildingName + room_number] = accessRoles + room_type + room_mode;//uses the same method as adding key value pairs but updates the values based on the users latest input
 
-		std::ofstream outputFile("map.txt");
+		ofstream outputFile("map.txt");
 
 		for (const auto& c : map_of_rooms) {
 			outputFile << c.first << ' ' << c.second << '\n';
@@ -391,7 +391,7 @@ public:
 				map_of_rooms[d.first] = a;//reassigns the new map value to the map key
 			}
 		}
-		std::ofstream outputFile("map.txt");
+		ofstream outputFile("map.txt");
 
 		for (const auto& c : map_of_rooms) {
 			outputFile << c.first << ' ' << c.second << '\n';
@@ -786,6 +786,83 @@ public:
 	long barcode;//variable stores users entered in barcode
 	void enter_barcode()
 	{
+		string l;
+		ifstream f("ID_Card_List.txt");//creates an output file stream
+
+		cout << "Barcode:" << "Name:" << "Role:";//prints out where the user barcode number, name and role is 
+		cout << '\n';
+		cout << '\n';
+		while (f >> l) {//extracts each line within the file as a string which is a users profile
+			const char* x = l.c_str();// to loop through each character of the key value, it needs to be converted to a constant char, used this link to resolve my issue: Accessed at: https://www.tutorialspoint.com/How-to-convert-an-std-string-to-const-char-or-char-in-Cplusplus Accesssed on: 13/1/23
+			for (int p = 0; p < strlen(x); p++)//Used this link to look at how to identify capital letters in a string, Accessed at: https://www.programiz.com/cpp-programming/library-function/cctype/isupper Accessed on:13/1/23
+			{
+				if (isdigit(x[p])) ///if a number is present in the string
+				{
+					cout << x[p];//print it out
+				}
+				else if (isupper(x[p]))//if a capital letter is present in the string
+				{
+					cout << " " << x[p];//print out a space and then print out the capital letter
+				}
+				else if (islower(x[p]))//if a lower case letter is present in the string
+				{
+					cout << x[p];//print it out 
+				}
+
+			}
+			cout << '\n';//once the string has been looped,it prints out a new line and then loops through the next user profile string
+			//cout << l << endl;//prints out all the profiles to the screen
+		}
+		f.close();
+
+
+		map<string, string> mapofrooms;//map strcture stores the map as a key value pair
+		string k;//stores key
+		string v;//stores value
+
+		ifstream mapfile("map.txt");//input file stream gets the map text file
+
+
+		while (mapfile >> k >> v) {//while loop loops through the map text file and stores the indovidual map keys and values in the map structure
+			mapofrooms[k] = v;//storing the map key and map value in the map structure
+		}
+		mapfile.close();//close the map file stream
+		cout << '\n';
+		cout << '\n';
+		cout << "Room:                        Users who can access the room:         Type of room:     Room Mode:(Normal/Emergency)";
+		cout << '\n';
+		cout << '\n';
+		//Accessed from https://marketsplash.com/tutorials/cpp/cplusplus-map-to-file/ Accessed at:25/11/23
+		map<std::string, string>::iterator o = mapofrooms.begin();//iterates through map using a iterator function which iterates bothe keyts and values from the beginning of the map
+		//Accessed from https://iq.opengenus.org/2d-maps-in-cpp/ Accessed at:25/11/23
+		for (o = mapofrooms.begin(); o != mapofrooms.end(); o++) {//for loop that loops from the start of the map to the end of the map 
+			cout << o->first << "                       ";//ouputs the room key to the screen and then the code below is responsiable for printing out the map key values with spaces in between characters where a capital letter is present.
+			const char* x = o->second.c_str();// to loop through each character of the key value, it needs to be converted to a constant char, used this link to resolve my issue: Accessed at: https://www.tutorialspoint.com/How-to-convert-an-std-string-to-const-char-or-char-in-Cplusplus Accesssed on: 13/1/23
+			for (int p = 0; p < strlen(x); p++)//Used this link to look at how to identify capital letters in a string, Accessed at: https://www.programiz.com/cpp-programming/library-function/cctype/isupper Accessed on:13/1/23
+			{
+				if (isupper(x[p])) //if a capital letter is present in the string
+				{
+					cout << " " << x[p];//print a space then print out the caital letter
+					
+				}
+				else if (islower(x[p])) //if a lower case charcter is found
+				{
+					cout << x[p];//print it to the screen without any spaces
+				
+				}
+					
+			}
+			cout << '\n';//print out new line for the next user profile to be printed to the screen
+			
+			//prints out the map keys which are the building keys and room numbers combined
+		}//this is done by using a pointer that points to the keys of the map only using the pointer 'first'. The 'second' pointer is then used to extract map values.
+		cout << '\n';
+		cout << '\n';
+	
+
+
+
+
 		cout << "Enter the card barcode:";
 		cin >> barcode;//enter in barcode here
 		// Create and open a text file
